@@ -21,7 +21,7 @@ public:
 
     HashMapList(unsigned int k, unsigned int (*hashFuncP)(K clave));
 
-    void getList(K clave);
+    void getList(K clave); //metodo mas utilizado
 
     void put(K clave, T valor);
 

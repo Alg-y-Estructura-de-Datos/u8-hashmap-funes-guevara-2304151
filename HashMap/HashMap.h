@@ -18,7 +18,7 @@ private:
 public:
     explicit HashMap(unsigned int k);
 
-    HashMap(unsigned int k, unsigned int (*hashFuncP)(K clave));
+    HashMap(unsigned int k, unsigned int (*hashFuncP)(K clave)); //no aborda las colisiones
 
     T get(K clave);
 
@@ -34,7 +34,7 @@ public:
 };
 
 template <class K, class T>
-HashMap<K, T>::HashMap(unsigned int k)
+HashMap<K, T>::HashMap(unsigned int k) //constructor
 {
     tamanio = k;
     tabla = new HashEntry<K, T> *[tamanio];
@@ -72,7 +72,7 @@ HashMap<K, T>::~HashMap()
 template <class K, class T>
 T HashMap<K, T>::get(K clave)
 {
-    unsigned int pos = hashFuncP(clave) % tamanio;
+    unsigned int pos = hashFuncP(clave) % tamanio; //de acuerdo a la funcion hash me va a retornar un tamaño
     if (tabla[pos] == NULL)
     {
         throw 404;
@@ -102,11 +102,11 @@ template <class K, class T>
 void HashMap<K, T>::remove(K clave) {
     unsigned int pos = hashFuncP(clave) % tamanio;
 
-    if (tabla[pos] == NULL) {
+    if (tabla[pos] == NULL) { //la posicion no es lo mismo que la clave
         throw 404; // No encontrado
     }
 
-    if (tabla[pos]->getClave() == clave) {
+    if (tabla[pos]->getClave() == clave) { //no elimina x similitud, sino por exactitud
         delete tabla[pos]; // Eliminar la entrada
         tabla[pos] = NULL;  // Marcar la posición como vacía
     } else {
@@ -128,7 +128,7 @@ bool HashMap<K, T>::esVacio()
 }
 
 template <class K, class T>
-unsigned int HashMap<K, T>::hashFunc(K clave)
+unsigned int HashMap<K, T>::hashFunc(K clave) //funcion por defecto
 {
     return (unsigned int)clave;
 }
@@ -137,7 +137,7 @@ template <class K, class T>
 void HashMap<K, T>::print()
 {
 
-    std::cout << "i"
+    std::cout << "i" //para que tenga formato de tablita
               << " "
               << "Clave"
               << "\t\t"
